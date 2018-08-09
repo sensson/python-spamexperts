@@ -22,6 +22,7 @@ se = API(
         url='https://yourcluster/',
         username='username',
         password='secure',
+        debug=True,
      )
 
 destination = controllers.Destination(api=se)
@@ -33,8 +34,6 @@ print(destination.read(
 `params` is expected to be a dictionary holding key/value information that
 you want to pass to the API. More information on these parameters can be
 found in the SpamExperts API documentation.
-
-`debug` is available in the API-class.
 
 # Error handling
 
