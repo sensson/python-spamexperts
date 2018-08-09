@@ -100,7 +100,7 @@ class DomainUser(Controller):
     action_delete = 'remove'
 
     def read(self, params={}):
-        '''The dmoainuser controller in SpamExperts has no read method. This is
+        '''The domainuser controller in SpamExperts has no read method. This is
         available in the user controller. Override read to call a different
         controller. This call has no parameters'''
         params['role'] = 'domain'
