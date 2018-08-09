@@ -102,7 +102,7 @@ class DomainUser(Controller):
     def read(self, params={}):
         '''The domainuser controller in SpamExperts has no read method. This is
         available in the user controller. Override read to call a different
-        controller. This call has no parameters'''
+        controller. This call has one parameter.'''
         params['role'] = 'domain'
         return self.action(params, controller='user', action='list')
 
@@ -122,7 +122,7 @@ class EmailUser(Controller):
     def read(self, params={}):
         '''The emailusers controller in SpamExperts has no read method. This is
         available in the user controller. Override read to call a different
-        controller and add the only supported parameter.'''
+        controller and add the supported parameters.'''
 
         params = {
             'role': 'email',
