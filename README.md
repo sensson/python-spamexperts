@@ -24,7 +24,7 @@ print(destination.read(
 ## Controllers
 
 SpamExperts uses controllers and actions and so does our interface. Our
-classes are specific and structured, whereas SpamExperts can be generic
+classes are specific and structured, whereas the API itself can be generic
 and unstructured. Our classes are flexible and capable of routing requests
 to different SpamExperts controllers whenever needed.
 
@@ -38,7 +38,7 @@ controller has the following methods available:
 
 `params` is expected to be a dictionary holding key/value information that
 you want to pass to the API. More information on these parameters can be
-found in the SpamExperts API documentation.
+found in the [SpamExperts API documentation](https://api.antispamcloud.com/api/help.php).
 
 If SpamExperts does not include a relevant action the method is still available
 but raises an exception when used.
@@ -48,7 +48,7 @@ CRUD-method. For example, to recover a password for a user.
 
 ## Current controllers
 
-For a list of available controllers please see
+For a list of available controllers and their methods please see
 [spamexperts/controllers.py](spamexperts/controllers.py).
 
 # Error handling
@@ -58,7 +58,14 @@ For a list of available controllers please see
 * If a controller is not supported it will raise a `ControllerException`.
 
 The `ApiException` will include the endpoint that returned an error. You can
-use this to find more information in the SpamExperts API documentation.
+use this to find more information in the [SpamExperts API documentation](https://api.antispamcloud.com/api/help.php).
+
+# Limitations
+
+This module has been tested with Python 3.
+
+We are aware of some gaps in the SpamExperts API. All known limitations are
+documented in [LIMITATIONS.md](LIMITATIONS.md).
 
 # Tests
 

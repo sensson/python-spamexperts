@@ -17,3 +17,6 @@ emailusers    | get*        | This is only available in `user`.
 report        | get*        | You cannot get a report, only update settings.
 
 \* This action doesn't exist.
+
+We encourage you to raise a support request at [support@spamexperts.com](support@spamexperts.com)
+if this blocks your development.
