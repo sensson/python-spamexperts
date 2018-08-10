@@ -1,10 +1,11 @@
 # Limitations
 
-We are aware of the following issues/limitations in the SpamExperts API.
+We are aware of the following issues/limitations in the SpamExperts API. They
+may affect our implementation in unexpected ways.
 
 Controller    | Action      | Description
 ----------    | -------     | ------------
-destination   | getroute    | Returns two semicolons before the port number, this can cause issues if you use it to create or update domains.
+destination   | getroute    | Returns two semicolons before the port number.
 domain        | add         | Doesn't allow you to set the contact address.
 domain        | exists      | Returns an error instead of `{"messages":[],"result":{"present":0}}`.
 domain        | read*       | The read action is only available in `domainslist`.
