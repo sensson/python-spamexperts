@@ -52,8 +52,7 @@ class Domain(Controller):
     action_create = 'add'
 
     def read(self, params={}):
-        '''The domain controller in SpamExperts has no read method. Instead,
-        we get a list of all domains.'''
+        # See LIMITATIONS.md: domain/read
         return self.action(params, controller='domainslist', action='get')
 
 
@@ -99,9 +98,7 @@ class DomainUser(Controller):
     action_delete = 'remove'
 
     def read(self, params={}):
-        '''The domainuser controller in SpamExperts has no read method. This is
-        available in the user controller. Override read to call a different
-        controller. This call has one parameter.'''
+        # See LIMITATIONS.md: domainuser/get
         params['role'] = 'domain'
         return self.action(params, controller='user', action='list')
 
@@ -119,13 +116,6 @@ class EmailUser(Controller):
     action_delete = 'remove'
 
     def read(self, params={}):
-        '''The emailusers controller in SpamExperts has no read method. This is
-        available in the user controller. Override read to call a different
-        controller and add the supported parameters.'''
-
-        params = {
-            'role': 'email',
-            'domain': params['domain'],
-        }
-
+        # See LIMITATIONS.md: emailusers/get
+        params['role'] = 'email'
         return self.action(params, controller='user', action='list')
