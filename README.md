@@ -2,16 +2,6 @@
 
 This is a Python interface to the SpamExperts API.
 
-The SpamExperts API is not machine-friendly. We have implemented CRUD (create,
-read, update and delete) functions for the API calls SpamExperts supports.
-
-Every class supports 4 methods:
-
-* create(params)
-* read(params)
-* update(params)
-* delete(params)
-
 # Usage
 
 ```python
@@ -31,9 +21,35 @@ print(destination.read(
 ))
 ```
 
+## Controllers
+
+SpamExperts uses controllers and actions and so does our interface. Our
+classes are specific and structured, whereas SpamExperts can be generic
+and unstructured. Our classes are flexible and capable of routing requests
+to different SpamExperts controllers whenever needed.
+
+The `spamexperts.controller.Controller`-class supports all CRUD-methods. Each
+controller has the following methods available:
+
+* `create(params)`
+* `read(params)`
+* `update(params)`
+* `delete(params)`
+
 `params` is expected to be a dictionary holding key/value information that
 you want to pass to the API. More information on these parameters can be
 found in the SpamExperts API documentation.
+
+If SpamExperts does not include a relevant action the method is still available
+but raises an exception when used.
+
+Additional methods may be added to support functionality that does not fit in a
+CRUD-method. For example, to recover a password for a user.
+
+## Current controllers
+
+For a list of available controllers please see
+[spamexperts/controllers.py](spamexperts/controllers.py).
 
 # Error handling
 
