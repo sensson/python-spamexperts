@@ -56,30 +56,36 @@ class Domain(Controller):
         return self.action(params, controller='domainslist', action='get')
 
 
-class Destination(Domain):
+
+class Destination(Controller):
+    controller = 'domain'
     action_read = 'getroute'
     action_update = 'edit'
 
 
-class SenderBlacklist(Domain):
+class SenderBlacklist(Controller):
+    controller = 'domain'
     action_create = 'blacklistsender'
     action_read = 'senderblacklist'
     action_delete = 'unblacklistsender'
 
 
-class SenderWhitelist(Domain):
+class SenderWhitelist(Controller):
+    controller = 'domain'
     action_create = 'whitelistsender'
     action_read = 'senderwhitelist'
     action_delete = 'unwhitelistsender'
 
 
-class RecipientBlacklist(Domain):
+class RecipientBlacklist(Controller):
+    controller = 'domain'
     action_create = 'blacklistrecipient'
     action_read = 'recipientblacklist'
     action_delete = 'unblacklistrecipient'
 
 
-class RecipientWhitelist(Domain):
+class RecipientWhitelist(Controller):
+    controller = 'domain'
     action_create = 'whitelistrecipient'
     action_read = 'recipientwhitelist'
     action_delete = 'unwhitelistrecipient'
