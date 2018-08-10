@@ -73,7 +73,7 @@ class API(object):
         action     -- a string containing the API action
         params     -- a dict containing all parameters
 
-        returns the url for used by a get or post request'''
+        returns the url that can be used by a get or post request'''
 
         # Handle formatting
         format = 'format/plain'
