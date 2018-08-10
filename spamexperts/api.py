@@ -4,18 +4,16 @@ from spamexperts.exceptions import ApiException
 
 
 class API(object):
-    def __init__(self, url, username, password, format='json', debug=False):
+    def __init__(self, url, username, password, debug=False):
         '''Set up the SpamExperts API
 
         url        -- the url the SpamExperts API
         username   -- the username to authenticate with
-        password   -- the password to authenticate with
-        format     -- the return format, plain or json, defaults to json'''
+        password   -- the password to authenticate with'''
 
         self.url = "{}/api".format(url)
         self.username = username
         self.password = password
-        self.format = format
         self.debug = debug
 
     def get(self, controller, action, params={}):
@@ -39,31 +37,28 @@ class API(object):
             print("Sent request: {}".format(url))
             print("Got output {}".format(response.text))
 
-        if self.format == 'json':
-            data = json.loads(response.text)
+        data = json.loads(response.text)
 
-            # Basic error check, this doesn't raise specific exceptions but
-            # does point you to the right controller/action.
-            if 'error' in data['messages']:
-                error_controller = "Error processing /api/{}/{}.".format(
-                    controller,
-                    action,
-                )
+        # Basic error check, this doesn't raise specific exceptions but
+        # does point you to the right controller/action.
+        if 'error' in data['messages']:
+            error_controller = "Error processing /api/{}/{}.".format(
+                controller,
+                action,
+            )
 
-                raise ApiException("{} {}".format(
-                    error_controller,
-                    ' '.join(data['messages']['error']),
-                ))
+            raise ApiException("{} {}".format(
+                error_controller,
+                ' '.join(data['messages']['error']),
+            ))
 
-            # If a call is successful we may get a 'success' message. In that
-            # case, return the success message.
-            if 'success' in data['messages']:
-                return data['messages']['success']
+        # If a call is successful we may get a 'success' message. In that
+        # case, return the success message.
+        if 'success' in data['messages']:
+            return data['messages']['success']
 
-            # Return the result
-            return data['result']
-
-        return response.text
+        # Return the result
+        return data['result']
 
     def set_url(self, controller, action, params={}):
         '''Set the url the client will consume from the SpamExperts API.
@@ -76,9 +71,7 @@ class API(object):
         returns the url that can be used by a get or post request'''
 
         # Handle formatting
-        format = 'format/plain'
-        if self.format == 'json':
-            format = 'format/json'
+        format = 'format/json'
 
         # Set the url
         params = params.items()
