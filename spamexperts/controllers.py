@@ -47,15 +47,10 @@ class Controller(object):
         return self.action(params, action=self.action_delete)
 
 
-class Domains(Controller):
-    controller = 'domainslist'
-    action_create = 'add'
-    action_read = 'get'
-
-
 class Domain(Controller):
     controller = 'domain'
-    action_read = 'exists'
+    action_create = 'add'
+    action_read = 'get'
 
 
 class Destination(Domain):
