@@ -116,6 +116,13 @@ class DomainUser(Controller):
         return self.action(params, controller='user', action='list')
 
 
+class DomainAdminContact(Controller):
+    controller = 'domainadmincontact'
+    action_create = 'set'
+    action_read = 'get'
+    action_update = 'set'
+
+
 class EmailAlias(Controller):
     controller = 'emailalias'
     action_create = 'add'
