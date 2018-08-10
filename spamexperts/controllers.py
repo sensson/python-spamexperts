@@ -55,6 +55,13 @@ class Domain(Controller):
         # See LIMITATIONS.md: domain/read
         return self.action(params, controller='domainslist', action='get')
 
+    def exists(self, params={}):
+        # See LIMITATIONS.md: domain/exists
+        try:
+            self.action(params, action='exists')
+            return True
+        except ApiException:
+            return False
 
 
 class Destination(Controller):
