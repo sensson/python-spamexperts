@@ -50,7 +50,11 @@ class Controller(object):
 class Domain(Controller):
     controller = 'domain'
     action_create = 'add'
-    action_read = 'get'
+
+    def read(self, params={}):
+        '''The domain controller in SpamExperts has no read method. Instead,
+        we get a list of all domains.'''
+        return self.action(params, controller='domainslist', action='get')
 
 
 class Destination(Domain):
