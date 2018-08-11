@@ -15,6 +15,7 @@ domainuser    | get*        | This is only available in `user`.
 emailusers    |             | This controller is plural.
 emailusers    | get*        | This is only available in `user`.
 report        | get*        | You cannot get a report, only update settings.
+user          | list        | Returns an error instead of an empty list.
 
 \* This action doesn't exist.
 

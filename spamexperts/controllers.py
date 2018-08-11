@@ -138,4 +138,9 @@ class EmailUser(Controller):
     def read(self, params={}):
         # See LIMITATIONS.md: emailusers/get
         params['role'] = 'email'
-        return self.action(params, controller='user', action='list')
+
+        # See LIMITATIONS.md: users/list
+        try:
+            return self.action(params, controller='user', action='list')
+        except ApiException:
+            return []
