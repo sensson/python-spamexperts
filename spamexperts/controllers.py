@@ -113,7 +113,22 @@ class DomainUser(Controller):
     def read(self, params={}):
         # See LIMITATIONS.md: domainuser/get
         params['role'] = 'domain'
-        return self.action(params, controller='user', action='list')
+        domain_users = []
+
+        # See LIMITATIONS.md: user/list/domain
+        for user in self.action(params, controller='user', action='list'):
+            domain_user_data = self.action(
+                controller='user',
+                action='get',
+                params={
+                    'id': user['id'],
+                }
+            )
+
+            user['email'] = domain_user_data['email']
+            domain_users.append(user)
+
+        return domain_users
 
 
 class DomainAdminContact(Controller):
