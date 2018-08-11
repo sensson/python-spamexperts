@@ -11,9 +11,9 @@ domain        | read*       | The read action is only available in `domainslist`
 domain        |             | You cannot get or set domain settings.
 domain        |             | You cannot get or set filter settings.
 domaincontact | get*        | You cannot get a domaincontact.
-domainuser    | get*        | This is only available in `user`.
+domainuser    | get*        | This is only available in `user/list/domain`.
 emailusers    |             | This controller is plural.
-emailusers    | get*        | This is only available in `user`.
+emailusers    | get*        | This is only available in `user/list/email`.
 report        | get*        | You cannot get a report, only update settings.
 user          | list        | Returns an error instead of an empty list.
 user          | list/domain | You cannot get the email address of a domain user.
