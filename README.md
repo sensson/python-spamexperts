@@ -54,9 +54,10 @@ For a list of available controllers and their methods please see
 # Migrations
 
 Unfortunately, SpamExperts doesn't allow you to migrate specific domains to
-other clusters without a lot of manual work.
+other clusters without a lot of manual work. We intend to solve that with a
+custom migration method.
 
-Most controllers have a `migrate_to`-method. For example:
+Most controllers have a `migrate_to`-method available. For example:
 
 ```python
 from spamexperts.controllers import Domain
@@ -78,17 +79,16 @@ cluster. It's similar as adding a domain through the web interface.
 We can do more though.
 
 `Domain.migrate_to` accepts `kwargs`. Why kwargs and not actual keywords? We
-try to keep our methods similar across all controllers.
+try to keep our methods similar across all controllers. There are two important
+arguments `Domain.migrate_to` accepts:
 
-There are two important arguments:
-
-* `migrate_dependencies`
-* `ignore_list`
+* `migrate_dependencies` - boolean, either True or False, defaults to False.
+* `ignore_list` - list, empty by default.
 
 `migrate_dependencies` will migrate all data that we think is related to the
 domain. We're still expanding this to be as complete as possible. If you
 migrate dependencies too, be sure to read the output as it includes new
-passwords for e-mail users.
+passwords for created users.
 
 `ignore_list` is a list of addresses that you want to ignore during your
 migration. This can be a requirement if the old cluster contains global
@@ -108,7 +108,9 @@ use this to find more information in the [SpamExperts API documentation](https:/
 This module requires Python 3.6.
 
 We are aware of some gaps in the SpamExperts API. All known limitations are
-documented in [LIMITATIONS.md](LIMITATIONS.md).
+documented in [LIMITATIONS.md](LIMITATIONS.md). If you find any others, feel
+free to report them, raise a pull request for it or send a message to
+SpamExperts.
 
 # Tests
 
