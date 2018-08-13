@@ -6,7 +6,7 @@ This is a Python interface to the SpamExperts API.
 
 ```python
 from spamexperts.api import API
-from spamexperts import controllers
+from spamexperts.controllers import Destination
 
 se = API(
         url='https://yourcluster/',
@@ -15,9 +15,9 @@ se = API(
         debug=True,
      )
 
-destination = controllers.Destination(api=se)
+destination = Destination(api=se)
 print(destination.read(
-   params={'domain': 'sensson.net'},
+    params={'domain': 'sensson.net'},
 ))
 ```
 
@@ -51,6 +51,49 @@ CRUD-method. For example, to recover a password for a user.
 For a list of available controllers and their methods please see
 [spamexperts/controllers.py](spamexperts/controllers.py).
 
+# Migrations
+
+Unfortunately, SpamExperts doesn't allow you to migrate specific domains to
+other clusters without a lot of manual work.
+
+Most controllers have a `migrate_to`-method. For example:
+
+```python
+from spamexperts.controllers import Domain
+
+domain = 'sensson.net'
+
+migration = Domain(api=api_source).migrate_to(
+    api_destination=api_destination,
+    params={
+      'domain': domain,
+    }
+)
+```
+
+This example assumes you have set both `api_source` and `api_destination` to an
+API object. This will migrate the domain without any other data to the new
+cluster. It's similar as adding a domain through the web interface.
+
+We can do more though.
+
+`Domain.migrate_to` accepts `kwargs`. Why kwargs and not actual keywords? We
+try to keep our methods similar across all controllers.
+
+There are two important arguments:
+
+* `migrate_dependencies`
+* `ignore_list`
+
+`migrate_dependencies` will migrate all data that we think is related to the
+domain. We're still expanding this to be as complete as possible. If you
+migrate dependencies too, be sure to read the output as it includes new
+passwords for e-mail users.
+
+`ignore_list` is a list of addresses that you want to ignore during your
+migration. This can be a requirement if the old cluster contains global
+whitelists or blacklists that you don't want to migrate.
+
 # Error handling
 
 * If a method is not supported it will raise an `ActionException`.
@@ -62,7 +105,7 @@ use this to find more information in the [SpamExperts API documentation](https:/
 
 # Limitations
 
-This module has been tested with Python 3.
+This module requires Python 3.6.
 
 We are aware of some gaps in the SpamExperts API. All known limitations are
 documented in [LIMITATIONS.md](LIMITATIONS.md).
