@@ -119,7 +119,12 @@ class Domain(Controller):
                     # Run the migration
                     migration_result = controller.migrate_to(
                         api_destination,
-                        params,
+                        # You would assume params can be used here too, but
+                        # as it turned out to leak the adjusted params
+                        # variable from the controller, we override it.
+                        {
+                            'domain': params['domain']
+                        },
                         **kwargs
                     )
 
